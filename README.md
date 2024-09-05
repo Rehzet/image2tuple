@@ -9,6 +9,28 @@ I created this script to display images on my 0.96-inch SSD1306 OLED display.
 - Pillow >= 2.1.1
 - numpy >= 10.4.0
 
+# Arguments
+
+  `-h, --help`: Show the help message
+  
+  `-W, --width`: The width to which the image will be resized in pixels (default 128).
+  
+  `-H, --height`: The height to which the image will be resized in pixels (default 64).
+  
+  `-p, --path`: The full path to the image file that you want to process.
+  
+  `-k, --keep-aspect-ratio`: Maintain the original aspect ratio of the image during resizing. If set, the image will be resized while preserving its proportions.    
+  
+  `-o, --output-file`: Specify the name of the file where the processed tuple array of pixel coordinates will be saved.            
+
+  `-s, --show-output`: If set, the tuple array of pixel coordinates will also be printed to the console in addition to being saved to a file.
+  
+  `-c, --clean-pixels`: Enable this option to remove isolated or 'noisy' pixels from the image, replacing them with a default color (black).
+  
+  `-t, --tolerance`: Tolerance to identify black pixels.
+  
+
+
 # Examples
 
 `python3 img2tuple.py --path "/home/rehzet/Imágenes/Logos/fujitsu.png" -W 100 -k -s`
