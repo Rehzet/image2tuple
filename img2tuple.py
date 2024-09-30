@@ -1,4 +1,5 @@
 import argparse
+import json
 
 from PIL import Image
 import numpy as np
@@ -61,9 +62,10 @@ def main(width, height, path, keep_aspect_ratio, output_file, show_output, clean
               if not es_pixel_negro(value, tolerance)]
 
     # Save tuple array to the output file
-    with open(output_file, 'w') as f:
-        f.write(str(tuples))
-        f.write("\n")
+    with open(output_file + '.json', 'w') as f:
+        json.dump(tuples, f)
+        # f.write(str(tuples))
+        # f.write("\n")
 
     if show_output:
         print(tuples)
@@ -74,7 +76,7 @@ if __name__ == "__main__":
     parser.add_argument("-H", "--height", type=int, default=64, help="The height to which the image will be resized in pixels (default 64). ")
     parser.add_argument("-p", "--path", type=str, required=True, help="The full path to the image file that you want to process.")
     parser.add_argument("-k", "--keep-aspect-ratio", action='store_true', help="Maintain the original aspect ratio of the image during resizing. If set, the image will be resized while preserving its proportions.")
-    parser.add_argument("-o", "--output-file", type=str, default='tuple_array.txt', help="Specify the name of the file where the processed tuple array of pixel coordinates will be saved.")
+    parser.add_argument("-o", "--output-file", type=str, default='tuple_array', help="Specify the name of the file where the processed tuple array of pixel coordinates will be saved. The output file will be in JSON format.")
     parser.add_argument("-s", "--show-output", action='store_true', help="If set, the tuple array of pixel coordinates will also be printed to the console in addition to being saved to a file.")
     parser.add_argument("-c", "--clean-pixels", action='store_true', help="Enable this option to remove isolated or 'noisy' pixels from the image, replacing them with a default color (black).")
     parser.add_argument("-t", "--tolerance", type=int, default=10, help="Tolerance for identifying black pixels.")
